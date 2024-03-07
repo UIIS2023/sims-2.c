@@ -1,0 +1,51 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.GuestOne"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="GuestOne" Height="450" Width="800">
+
+    <Grid>
+        <DockPanel>
+            <ToolBar DockPanel.Dock="Top" Height="25">
+                <Label Content="Name" Height="26"/>
+                <TextBox TextWrapping="Wrap" Text="{Binding Path =AccommodationName}"  Width="65" VerticalAlignment="Top"/>
+                <Label Content="Type" Height="26"/>
+                <ComboBox ItemsSource ="{Binding AccommodationsType}" SelectedItem ="{Binding SelectedType}" HorizontalAlignment="Left" Width="68"/>
+
+                <Label Content="Country" Height="26"/>
+                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" SelectionChanged="SelectedCountryChanged" Width="64" VerticalAlignment="Top"/>
+                <Label Content="City" Height="26"/>
+                <ComboBox ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" SelectionChanged="SelectedCityChanged" Width="64" VerticalAlignment="Top"/>
+                <Label Content="Geusts Number" Height="26"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=MaxGuestNum}" Width="54"/>
+                <Label Content="Days Before Cancel" Height="26" Width="110"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path= SearchedCancelationThreshold}" Width="58"/>
+                <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Click="SearchClick"/>
+                <Button Content="Show All" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAllClick"/>
+                <Button Content="Reserve Accommodation" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding CreateReservation_Command}"/>
+                <Button Content="Rate Accommodatoin" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding RateAccommodation_Command}"></Button>
+
+            </ToolBar>
+
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="2" RenderTransformOrigin="0.501,0.481" Width="800">
+                <DockPanel>
+                    <DataGrid ItemsSource="{Binding Accommodations,UpdateSourceTrigger=PropertyChanged}" Name="DataGrid"
+                        SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
+                        IsReadOnly="True" SelectionMode="Single"
+                        AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Width="800">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Location" Width="150" Binding="{Binding Location}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="MaxGuestsNum" Binding="{Binding MaxGuestNum}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="MinStayingDays" Binding="{Binding MinStayingDays}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="DaysBeforeCancel" Binding="{Binding CancellationThreshold}" Width="auto"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </StackPanel>
+        </DockPanel>
+
+    </Grid>
+</Window>

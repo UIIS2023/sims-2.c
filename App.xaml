@@ -1,0 +1,514 @@
+﻿<Application x:Class="Tourist_Project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:ns="clr-namespace:Tourist_Project"
+             xmlns:useCases="clr-namespace:Tourist_Project.Applications.UseCases"
+             StartupUri="WPF/Views/LoginWindow.xaml">
+    <Application.Resources>
+         <Image x:Key="RequestsImageGuide" Source="/Images/requestGuideIcon.png" Margin="5"></Image>
+         <Image x:Key="HistoryImageGuide" Source="/Images/historyGuideIcon.png" Margin="5"></Image>
+         <Image x:Key="FutureImageGuide" Source="/Images/futureGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="StartTourImageGuide" Source="/Images/startGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="CreateTourImageGuide" Source="/Images/addGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="HomePageImageGuide" Source="Images/homeGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="CancelImageGuide" Source="Images/cancelGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="StatisticsImageGuide" Source="Images/statisticsGuideIcon.png" Margin="5"></Image>
+        <Image x:Key="DismissalImageGuide" Source="Images/dismissalGuideIcon.png" Margin="5"></Image>
+
+        <Style x:Key="SerbianStyle" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/serbia.png" Margin="5" Height="15"></Image>
+                            <TextBlock Text="{ns:Loc Serbian}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="EnglishStyle" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/uk.png" Margin="5" Height="15"></Image>
+                            <TextBlock Text="{ns:Loc English}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RequestsButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/requestGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc Requests}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HomeButtonGuide" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/homeGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc HomePage}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="FutureButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/futureGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc FutureTours}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CreateButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/addGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc Create}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CancelButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/cancelGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc Cancel}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PlusButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/plus.png" VerticalAlignment="Center" Margin="7"></Image>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MinusButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/minusIcon.png" VerticalAlignment="Center" Margin="7"></Image>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DarkStyleButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/darkThemeIcon.png" Margin="2" Height="18"></Image>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LightStyleButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/lightThemeIcon.png" Margin="2" Height="18"></Image>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="GuideProfileImage" TargetType="Image">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect x:Name="Shadow" BlurRadius="10" Opacity="0.5" ShadowDepth="2" Color="LightSlateGray" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Clip">
+                <Setter.Value>
+                    <EllipseGeometry x:Name="Ellipse" Center="100,100" RadiusX="90" RadiusY="90" />
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="LightSlateGray"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="GuideName" TargetType="Label">
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="LightSlateGray"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="#F5F5F5" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="AlternatingRowBackground" Value="#F5F5F5" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="RowHeight" Value="30" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="SelectionMode" Value="Single" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1"
+                                            Padding="5">
+                                        <ContentPresenter VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#F5F5F5" />
+                        <Setter Property="BorderBrush" Value="#CCCCCC" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        <Setter Property="Foreground" Value="#333333" />
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Padding" Value="5" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LeftGrid" TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"></Setter>
+        </Style>
+
+        <Style x:Key="MainGrid" TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource PrimaryColor}"></Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

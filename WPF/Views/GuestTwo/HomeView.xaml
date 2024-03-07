@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="Tourist_Project.WPF.Views.GuestTwo.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tourist_Project.WPF.Views.GuestTwo"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:viewmodels="clr-namespace:Tourist_Project.WPF.ViewModels"
+             xmlns:validation="clr-namespace:Tourist_Project.WPF.Validation"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1000"
+             Background="#252530">
+    
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="510"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Margin="30,15,0,0"
+               FontSize="32" Content="Home"
+               HorizontalAlignment="Left" Foreground="White"
+               VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Content="Location:" FontSize="15"
+                       HorizontalAlignment="Left" Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="20,0,0,0"/>
+                <ComboBox ItemsSource="{Binding Countries}"
+                      SelectedItem="{Binding SelectedCountry}"                  
+                      Width="80" Height="25" HorizontalAlignment="Left"
+                      ToolTip="Select country" FontSize="13"/>
+                <ComboBox ItemsSource="{Binding Cities}"
+                          SelectedItem="{Binding SelectedCity}"
+                          Width="100" Height="25"
+                          HorizontalAlignment="Left" ToolTip="Select city"
+                          Margin="10,0,0,0" FontSize="13"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Label Content="Duration:" Foreground="White"
+                       Margin="10,0,0,0" FontSize="15"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+                <xctk:IntegerUpDown Width="50" FontSize="13"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                    <xctk:IntegerUpDown.Text>
+                        <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:PositiveIntegerValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </xctk:IntegerUpDown.Text>
+                </xctk:IntegerUpDown>
+
+                <Label Content="h" FontSize="15"
+                       HorizontalAlignment="Left" Foreground="White"
+                       VerticalAlignment="Center" Margin="0,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Label Content="Language:" FontSize="15"
+                       HorizontalAlignment="Left" Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+                <ComboBox ItemsSource="{Binding Languages}"
+                          SelectedItem="{Binding SelectedLanguage}"
+                          Width="80" FontSize="13"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center" ToolTip="Select language"
+                          Margin="0,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Label Content="Number of people:" FontSize="15"
+                       HorizontalAlignment="Left" Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+                <xctk:IntegerUpDown Width="50" FontSize="13"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center" 
+                                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                    <xctk:IntegerUpDown.Text>
+                        <Binding Path="NumberOfPeople" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validation:PositiveIntegerValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </xctk:IntegerUpDown.Text>
+                </xctk:IntegerUpDown>
+            </StackPanel>
+
+            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                <Button Content="Search" Cursor="Hand" ToolTip="Search tours"
+                        Command="{Binding SearchCommand}"
+                        Width="70" Height="30" FontSize="15"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="20,0,0,0"/>
+                <Button Content="Show all" Command="{Binding ShowAllCommand}" 
+                        Width="70" Height="30" FontSize="15"
+                        HorizontalAlignment="Right" ToolTip="Show all tours" 
+                        VerticalAlignment="Center" Cursor="Hand"
+                        Margin="20,0,0,0"/>
+
+            </StackPanel>
+
+        </Grid>
+
+
+
+        <DataGrid FontSize="15" Grid.Row="2" Margin="30,10,30,10"
+                  ItemsSource="{Binding Tours, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="120"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="130"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="auto"/>
+                <DataGridTextColumn Header="Maximum guests" Binding="{Binding MaxGuestsNumber}" Width="150"/>
+                <DataGridTextColumn Header="Spots left" Binding="{Binding SpotsLeft}" Width="auto"/>
+                <DataGridTextColumn Header="Start Date" Binding="{Binding StartTime}" Width="auto"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="75"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button Content="Reserve" FontSize="15" Margin="0,15"
+                Command="{Binding ReserveCommand}"
+                Grid.Row="3" Width="80" Height="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom" Cursor="Hand"
+                ToolTip="Go to reservation page"/>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Image Source="/Images/White question mark.png" Height="30"
+                   Cursor="Hand" Margin="30,-5"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HelpCommand}" />
+                </Image.InputBindings>
+            </Image>
+            <TextBlock Text="Help" Foreground="White" HorizontalAlignment="Center"
+                   FontSize="13" Margin="0,0,0,15"/>
+        </StackPanel>
+        
+
+
+
+    </Grid>
+</UserControl>

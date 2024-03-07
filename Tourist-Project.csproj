@@ -1,0 +1,190 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Tourist_Project</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\loginIcon.png" />
+    <None Remove="Images\acceptIcon.png" />
+    <None Remove="Images\add.png" />
+    <None Remove="Images\addGuideIcon.png" />
+    <None Remove="Images\back.png" />
+    <None Remove="Images\calloutImage.png" />
+    <None Remove="Images\cancelGuideIcon.png" />
+    <None Remove="Images\ComplexTours.png" />
+    <None Remove="Images\darkThemeIcon.png" />
+    <None Remove="Images\Darth Vader.jpg" />
+    <None Remove="Images\checkGuideIcon.png" />
+    <None Remove="Images\delete.png" />
+    <None Remove="Images\dismissalGuideIcon.png" />
+    <None Remove="Images\edit.png" />
+    <None Remove="Images\exitGuideIcon.jpg" />
+    <None Remove="Images\futureGuideIcon.png" />
+    <None Remove="Images\History.png" />
+    <None Remove="Images\historyGuideIcon.png" />
+    <None Remove="Images\Home.png" />
+    <None Remove="Images\homeGuideIcon.png" />
+    <None Remove="Images\MyTours.png" />
+    <None Remove="Images\lightThemeIcon.png" />
+    <None Remove="Images\minusIcon.png" />
+    <None Remove="Images\No images to show.jpg" />
+    <None Remove="Images\listGuideIcon.png" />
+    <None Remove="Images\Notifications.png" />
+    <None Remove="Images\pdf.png" />
+    <None Remove="Images\plus.png" />
+    <None Remove="Images\profile.jpg" />
+    <None Remove="Images\requestGuideIcon.png" />
+    <None Remove="Images\Requests.png" />
+    <None Remove="Images\reviewGuideIcon.png" />
+    <None Remove="Images\search.png" />
+    <None Remove="Images\serbia.png" />
+    <None Remove="Images\startGuideIcon.png" />
+    <None Remove="Images\statisticsGuideIcon.png" />
+    <None Remove="Images\uk.png" />
+    <None Remove="Images\view.png" />
+    <None Remove="Images\Vouchers.png" />
+    <None Remove="Images\White question mark.png" />
+    <None Remove="Images\Wizard Images\ComplexToursPage.png" />
+    <None Remove="Images\Wizard Images\HistoryPage.png" />
+    <None Remove="Images\Wizard Images\HomePage.png" />
+    <None Remove="Images\Wizard Images\MyToursPage.png" />
+    <None Remove="Images\Wizard Images\NotificationsPage.png" />
+    <None Remove="Images\Wizard Images\RequestComplexTourPage.png" />
+    <None Remove="Images\Wizard Images\RequestsStatsPage.png" />
+    <None Remove="Images\Wizard Images\ReservationPage.png" />
+    <None Remove="Images\Wizard Images\ReviewPage.png" />
+    <None Remove="Images\Wizard Images\VouchersPage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="LightningChart" Version="10.4.1.1" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.7" />
+    <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="21.2.8" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="21.2.8" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\loginIcon.png" />
+    <Resource Include="Images\acceptIcon.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\addGuideIcon.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\calloutImage.png" />
+    <Resource Include="Images\cancelGuideIcon.png" />
+    <Content Include="Images\Darth Vader.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\No images to show.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\checkGuideIcon.png" />
+    <Resource Include="Images\ComplexTours.png" />
+    <Resource Include="Images\darkThemeIcon.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\dismissalGuideIcon.png" />
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\exitGuideIcon.jpg" />
+    <Resource Include="Images\futureGuideIcon.png" />
+    <Resource Include="Images\History.png" />
+    <Resource Include="Images\historyGuideIcon.png" />
+    <Resource Include="Images\Home.png" />
+    <Resource Include="Images\homeGuideIcon.png" />
+    <Resource Include="Images\lightThemeIcon.png" />
+    <Resource Include="Images\listGuideIcon.png" />
+    <Resource Include="Images\MyTours.png" />
+    <Resource Include="Images\Notifications.png" />
+    <Resource Include="Images\minusIcon.png" />
+    <Resource Include="Images\pdf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\plus.png" />
+    <Resource Include="Images\profile.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\requestGuideIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Requests.png" />
+    <Resource Include="Images\reviewGuideIcon.png" />
+    <Resource Include="Images\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\serbia.png" />
+    <Resource Include="Images\startGuideIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\statisticsGuideIcon.png" />
+    <Resource Include="Images\uk.png" />
+    <Resource Include="Images\view.png" />
+    <Resource Include="Images\Vouchers.png" />
+    <Resource Include="Images\White question mark.png" />
+    <Resource Include="Images\Wizard Images\ComplexToursPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\HistoryPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\HomePage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\MyToursPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\NotificationsPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\RequestComplexTourPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\RequestsStatsPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\ReservationPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\ReviewPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Wizard Images\VouchersPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

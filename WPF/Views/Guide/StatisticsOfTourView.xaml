@@ -1,0 +1,200 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.Guide.StatisticsOfTourView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ns="clr-namespace:Tourist_Project"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Tourists Application" Height="550" Width="800">
+    <Window.Resources>
+        <Style x:Key="PDFButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/pdf.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc PDFReport}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BackButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/back.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc Back}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding BackCommand}"></KeyBinding>
+        <KeyBinding Key="P" Modifiers="Control" Command="{Binding PDFReportCommand}"></KeyBinding>
+    </Window.InputBindings>
+    <Grid x:Name="Window" Style="{StaticResource MainGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid x:Name="ImageAndInfo" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="{Binding Image.Url}" Height="156" Width="211"></Image>
+            <Border Grid.Column="1" Height="156" Width="541" 
+                    BorderBrush="Black" BorderThickness="3" CornerRadius="20">
+                <Grid x:Name="Info">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding Tour.Name}" FontSize="35" HorizontalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="{Binding LoggedInUser.FullName}" FontSize="30"></Label>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding Tour.Language}" FontSize="30"></Label>
+                    <Label Grid.Row="2" Grid.Column="0" Content="{Binding Location}" FontSize="30"></Label>
+                    <Label Grid.Row="2" Grid.Column="1" Content="{Binding Tour.MaxGuestsNumber}" FontSize="30"></Label>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="Statistics" Grid.Row="1" Style="{StaticResource MainGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="TitleForAgeGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center">
+                <Label x:Name="AgeTitle" Content="{ns:Loc AgeStructure}" FontSize="20"></Label>
+            </Grid>
+            <Grid x:Name="AgePie" Grid.Column="0" Grid.Row="1">
+                <lvc:PieChart Height="200" Width="180"
+                              VerticalAlignment="Top"
+                              Margin="0 20 20 0"
+                              Series="{Binding AgeSeriesCollection}"
+                              LegendLocation="Bottom">
+                </lvc:PieChart>
+            </Grid>
+            <Grid x:Name="AgeInfo" Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="Under18" Grid.Row="0" Content="{ns:Loc TouristsUnder}" FontSize="15" VerticalAlignment="Center"></Label>
+                <Label x:Name="DataUnder18" Grid.Row="1" Content="{Binding TouristsNumberYounger}" FontSize="15" VerticalAlignment="Top" HorizontalContentAlignment="Center"></Label>
+                <Label x:Name="Between18And50" Grid.Row="2" Content="{ns:Loc TouristsBetween}" FontSize="15" VerticalAlignment="Center"></Label>
+                <Label x:Name="DataBetween18And50" Grid.Row="3" Content="{Binding TouristsNumberBetween}" FontSize="15" VerticalAlignment="Top" HorizontalContentAlignment="Center"></Label>
+                <Label x:Name="Above50" Grid.Row="4" Content="{ns:Loc TouristsOlder}" FontSize="15" VerticalAlignment="Center"></Label>
+                <Label x:Name="DataAbove50" Grid.Row="5" Content="{Binding TouristsNumberOlder}" FontSize="15" VerticalAlignment="Top" HorizontalContentAlignment="Center"></Label>
+            </Grid>
+            <Grid x:Name="TitleForVoucherGrid" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0">
+                <Label x:Name="VoucherTitle" Content="{ns:Loc UsingVoucherStructure}" FontSize="20" HorizontalAlignment="Center"></Label>
+            </Grid>
+            <Grid x:Name="VoucherPie" Grid.Column="2" Grid.Row="1">
+                <lvc:PieChart Height="200" Width="180"
+                              VerticalAlignment="Top"
+                              Margin="0 20 20 0"
+                              Series="{Binding VoucherSeriesCollection}"
+                              LegendLocation="Bottom"></lvc:PieChart>
+            </Grid>
+            <Grid x:Name="VoucherInfo" Grid.Column="3" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="WithVoucher" Grid.Row="0" Content="{ns:Loc TouristsWithVoucher}" FontSize="15" VerticalAlignment="Center"></Label>
+                <Label x:Name="DataWithVoucher" Grid.Row="1" Content="{Binding WithVoucher}" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"></Label>
+                <Label x:Name="WithoutVoucher" Grid.Row="2" Content="{ns:Loc TouristsWithoutVoucher}" FontSize="15" VerticalAlignment="Center"></Label>
+                <Label x:Name="DataWithOutVoucher" Grid.Row="3" Content="{Binding WithoutVoucher}" FontSize="15" VerticalAlignment="Top" HorizontalContentAlignment="Center"></Label>
+            </Grid>
+        </Grid>
+        <Grid x:Name="ButtonGrid" Grid.Row="2" Style="{StaticResource LeftGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="266"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="266"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource SerbianStyle}" Command="{Binding ToSerbianCommand}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50 0 0 0"></xctk:IconButton>
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource EnglishStyle}" Command="{Binding ToEnglishCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 0"></xctk:IconButton>
+
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource DarkStyleButton}" Command="{Binding ToDarkThemeCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0 50 0"></xctk:IconButton>
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource LightStyleButton}" Command="{Binding ToLightThemeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 0"></xctk:IconButton>
+
+            <xctk:IconButton x:Name="PdfStatisticsButton" Grid.Column="1" Width="200" Height="40" HorizontalAlignment="Center" Command="{Binding PDFReportCommand}" Style="{StaticResource PDFButton}"></xctk:IconButton>
+            <xctk:IconButton x:Name="BackButton" Grid.Column="2" Width="200" Height="40" HorizontalAlignment="Center" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"></xctk:IconButton>
+        </Grid>
+            <StatusBar x:Name="StatusBar" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <TextBlock Text="{ns:Loc Statistics}" FontSize="15" Height="25" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            </StatusBar>
+    </Grid>
+</Window>

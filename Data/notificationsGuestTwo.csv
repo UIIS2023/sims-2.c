@@ -1,0 +1,4 @@
+1|4|13|Confirm your presence|5/11/2023 12:00:00 AM|True|True|ConfirmPresence
+2|4|7|Tour request accepted|5/11/2023 12:00:00 AM|True|True|TourAccepted
+3|4|7|New tour|5/11/2023 12:00:00 AM|True|True|NewTour
+4|4|56|Confirm your presence|6/12/2023 12:00:00 AM|False|True|ConfirmPresence

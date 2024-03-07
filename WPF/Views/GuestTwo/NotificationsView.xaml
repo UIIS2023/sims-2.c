@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Tourist_Project.WPF.Views.GuestTwo.NotificationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tourist_Project.WPF.Views.GuestTwo"
+             xmlns:views="clr-namespace:Tourist_Project.WPF.Views.GuestTwo"
+             xmlns:viewmodels="clr-namespace:Tourist_Project.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NotificationsViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1000"
+             Background="#252530">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:ConfirmPresenceViewModel}">
+            <views:ConfirmPresenceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SelectNotificationViewModel}">
+            <views:SelectNotificationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TourRequestAcceptedViewModel}">
+            <views:TourRequestAcceptedView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:NewTourNotificationViewModel}">
+            <views:NewTourNotificationView/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Label Margin="30,15,0,0"
+               FontSize="32" Content="Notifications"
+               HorizontalAlignment="Left" Foreground="White"
+               VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <DataGrid Margin="125,125,0,125" FontSize="16"
+                      ItemsSource="{Binding Notifications}"
+                      SelectedItem="{Binding SelectedNotification}"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      Width="400" HorizontalAlignment="Left">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="200"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <ContentControl Height="350" Width="350"
+                            Content="{Binding CurrentViewModel}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Image Source="/Images/White question mark.png" Height="30"
+                   Cursor="Hand" Margin="30,-5"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HelpCommand}" />
+                </Image.InputBindings>
+            </Image>
+            <TextBlock Text="Help" Foreground="White" HorizontalAlignment="Center"
+                       FontSize="13" Margin="0,0,0,15"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

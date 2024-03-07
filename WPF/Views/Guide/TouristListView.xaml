@@ -1,0 +1,138 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.Guide.TouristListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ns="clr-namespace:Tourist_Project"
+        xmlns:converters="clr-namespace:Tourist_Project.WPF.Converters"
+        mc:Ignorable="d"
+        Title="Tourist Application" Height="500" Width="650"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:PresenceConverter x:Key="PresenceConverter" />
+
+        <Style x:Key="CallOutButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="CancelImage"  Source="../../../Images/calloutImage.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc CallOut}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BackButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="CancelImage"  Source="../../../Images/back.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc Back}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource LeftGrid}">
+            <TextBlock Text="{Binding ActiveTour.Name }" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Style="{StaticResource MainGrid}">
+            <TextBlock Text="{Binding CurrentTime}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Style="{StaticResource LeftGrid}">
+            <xctk:IconButton Width="200" Height="40" Style="{StaticResource HomeButtonGuide}" VerticalAlignment="Top" Command="{Binding HomeCommand}"></xctk:IconButton>
+            <xctk:IconButton Width="200" Height="40" Style="{StaticResource CallOutButton}" VerticalAlignment="Top" Margin="0 60 0 0 " Command="{Binding CallOutCommand}"></xctk:IconButton>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource MainGrid}">
+            <DataGrid Margin="10 0 20 20"
+                      ItemsSource="{Binding TourAttendances}"
+                      SelectedItem="{Binding SelectedTourAttendance}"
+                      Cursor="Hand"
+                      Style="{StaticResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding User.Username}" Width="130"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="{ns:Loc Attendance}" Binding="{Binding Presence, Converter={StaticResource PresenceConverter}}"></DataGridCheckBoxColumn>
+                    <DataGridTextColumn Header="{ns:Loc CheckpointName}" Binding="{Binding TourPoint.Name}" Width="*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Style="{StaticResource MainGrid}">
+            <xctk:IconButton Width="200" Height="40" Style="{StaticResource BackButton}" Margin="0 0 20 0" HorizontalAlignment="Right" Command="{Binding BackCommand}"></xctk:IconButton>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Style="{StaticResource LeftGrid}">
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource SerbianStyle}" Command="{Binding ToSerbianCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 0 0 25"></xctk:IconButton>
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource EnglishStyle}" Command="{Binding ToEnglishCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 0 0 0"></xctk:IconButton>
+
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource DarkStyleButton}" Command="{Binding ToDarkThemeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 25"></xctk:IconButton>
+            <xctk:IconButton Width="75" Height="24" Style="{StaticResource LightStyleButton}" Command="{Binding ToLightThemeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 0"></xctk:IconButton>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBox Text="{ns:Loc CallOutTourists}" FontSize="15" Height="25" VerticalAlignment="Center" Margin="20 0 0 0"></TextBox>
+        </Grid>
+    </Grid>
+</Window>

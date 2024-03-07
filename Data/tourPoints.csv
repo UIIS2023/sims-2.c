@@ -1,0 +1,138 @@
+1|strand|1|True
+2|centar|1|True
+3|kej|1|False
+4|centar|2|True
+5|hram|2|True
+6|kalemegdan|2|True
+7|kej|3|True
+8|petrovaradin|3|False
+9|voznja brodom|3|False
+10|rajiceva|4|False
+11|usce|4|False
+12|kalemegdan|4|False
+13|kej|5|False
+14|kalemegdan|5|False
+15|kej|6|False
+16|tvrdjava|6|False
+17|katedrala|6|False
+18|kej|7|False
+19|strand|7|False
+20|vlada|8|True
+21|kalemegdan|8|False
+22|pozoriste|9|True
+23|centar|9|False
+24|muzej|10|False
+25|najlon|10|False
+26|pozoriste|11|False
+27|tvrdjava|11|False
+28|kej|13|True
+29|katedrala|13|False
+30|kej|19|True
+31|jezero|19|False
+32|prvi|20|True
+33|drugi|20|True
+34|treci|20|True
+35|prvi|21|False
+36|drugi|21|False
+37|treci|21|False
+38|prvi|22|False
+39|drugi|22|False
+40|treci|22|False
+41|tacka jedan|23|False
+42|tacka dva|23|False
+43|t|24|False
+44|plava fontana|24|False
+45|gradska kuca|24|False
+46|zoo vrt|24|False
+47|plava fontana|25|False
+48|gradska kuca|25|False
+49|prvi|26|False
+50|drugi|26|False
+51|prvi|27|False
+52|drugi|27|False
+53|prvi|27|False
+54|drugi|27|False
+55|prvi|27|False
+56|drugi|27|False
+57|prvi|27|False
+58|drugi|27|False
+59|prvi|27|False
+60|drugi|27|False
+61|plava fontana|27|False
+62|palata|27|False
+63|palic|27|False
+64|kalemegdan|28|False
+65|knez|28|False
+66|beograd na vodi|28|False
+67|Gradska kuca|29|True
+68|Plava fontana|29|True
+69|Jadran|29|True
+70|Gradska kuca|30|True
+71|Plava fontana|30|True
+72|Jadran|30|True
+73|Gradska kuca|31|True
+74|Plava fontana|31|True
+75|Jadran|31|True
+76|Gradska kuca|32|True
+77|Plava fontana|32|True
+78|Jadran|32|True
+79|Gradska kuca|33|True
+80|Plava fontana|33|True
+81|Jadran|33|True
+82|Gradska kuca|34|True
+83|Plava fontana|34|True
+84|Jadran|34|True
+85|Gradska kuca|35|True
+86|Plava fontana|35|True
+87|Jadran|35|True
+88|Gradska kuca|36|True
+89|Plava fontana|36|True
+90|Jadran|36|True
+91|Gradska kuca|37|True
+92|Plava fontana|37|True
+93|Jadran|37|True
+94|Gradska kuca|38|True
+95|Plava fontana|38|True
+96|Jadran|38|True
+97|Gradska kuca|39|True
+98|Plava fontana|39|True
+99|Jadran|39|True
+100|Gradska kuca|40|True
+101|Plava fontana|40|True
+102|Jadran|40|True
+103|Gradska kuca|41|True
+104|Plava fontana|41|True
+105|Jadran|41|True
+106|Gradska kuca|42|True
+107|Plava fontana|42|True
+108|Jadran|42|True
+109|Gradska kuca|43|True
+110|Plava fontana|43|True
+111|Jadran|43|True
+112|Gradska kuca|44|True
+113|Plava fontana|44|True
+114|Jadran|44|True
+115|Gradska kuca|45|True
+116|Plava fontana|45|True
+117|Jadran|45|True
+118|Gradska kuca|46|True
+119|Plava fontana|46|True
+120|Jadran|46|True
+121|Gradska kuca|47|True
+122|Plava fontana|47|True
+123|Jadran|47|True
+124|Gradska kuca|48|True
+125|Plava fontana|48|True
+126|Jadran|48|True
+127|Tvrdjava|49|False
+128|Centar|49|False
+129|Katedrala|54|False
+130|Promenada|54|False
+131|Katedrala|54|False
+132|Promenada|54|False
+133|Palic|55|False
+134|Radijalac|55|False
+135|Grad|56|True
+136|Sunce|56|True
+137|Beograd na vodi|53|False
+138|Usce|53|False

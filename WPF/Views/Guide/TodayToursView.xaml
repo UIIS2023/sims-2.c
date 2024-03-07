@@ -1,0 +1,187 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.Guide.TodayToursView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ns="clr-namespace:Tourist_Project"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Tourist application" Height="800" Width="1100">
+    <Window.Resources>
+        <Style x:Key="CreateButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/addGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc CreateTour}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StartButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/startGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc StartTour}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HistoryButton" TargetType="xctk:IconButton">
+            <Setter Property="Background" Value="{DynamicResource ActionColor}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:IconButton}">
+                        <Border CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <ItemContainerTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../../Images/historyGuideIcon.png" Margin="5" Height="25"></Image>
+                            <TextBlock Text="{ns:Loc History}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </ItemContainerTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                    <Setter Property="Background" Value="LightSlateGray"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="Window">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid x:Name="LeftGrid" Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid x:Name="ProfileGrid" Grid.Row="0" Style="{DynamicResource LeftGrid}">
+                <Image Source="/Images/profile.jpg" Width="200" Height="200" Margin="0 0 0 30" Style="{StaticResource GuideProfileImage}">
+                    <Image.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding ProfileViewCommand, Mode=OneTime}"/>
+                    </Image.InputBindings>
+                </Image>
+                <Label Margin="10 240 10 25" Content="Luka Todorovic" HorizontalAlignment="Center" FontSize="20" Style="{StaticResource GuideName}">
+                    <Label.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding ProfileViewCommand, Mode=OneTime}" />
+                    </Label.InputBindings>
+                </Label>
+                <Label Margin="10 270 10 0" Content="{ns:Loc Guide}" HorizontalAlignment="Center" FontSize="15"></Label>
+            </Grid>
+            <Grid x:Name="ButtonsGrid" Grid.Row="1" Style="{DynamicResource LeftGrid}">
+                <xctk:IconButton Width="200" Height="40" VerticalAlignment="Top" Margin="50,10,50,0"  Command="{Binding CreateCommand}" Cursor="Hand" Style="{StaticResource CreateButton}"/>
+                <xctk:IconButton Width="200" Height="40" VerticalAlignment="Top" Margin="50,70,50,0" Command="{Binding StartTourCommand}" Cursor="Hand" Style="{StaticResource StartButton}"/>
+                <xctk:IconButton Width="200" Height="40" VerticalAlignment="Top" Margin="50,130,50,0" Command="{Binding FutureToursCommand}" Cursor="Hand" Style="{StaticResource FutureButton}"/>
+                <xctk:IconButton Width="200" Height="40" VerticalAlignment="Top" Margin="50,190,50,0" Command="{Binding HistoryCommand}" Cursor="Hand" Style="{StaticResource HistoryButton}"/>
+                <xctk:IconButton Width="200" Height="40" VerticalAlignment="Top" Margin="50,250,50,0" Command="{Binding RequestsCommand}" Cursor="Hand" Style="{StaticResource RequestsButton}"/>
+
+                <xctk:IconButton Width="75" Height="24" Style="{DynamicResource SerbianStyle}" Command="{Binding ToSerbianCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 50"></xctk:IconButton>
+                <xctk:IconButton Width="75" Height="24" Style="{DynamicResource EnglishStyle}" Command="{Binding ToEnglishCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 20"></xctk:IconButton>
+
+                <xctk:IconButton Width="75" Height="24" Style="{DynamicResource DarkStyleButton}" Command="{Binding ToDarkThemeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 50"></xctk:IconButton>
+                <xctk:IconButton Width="75" Height="24" Style="{DynamicResource LightStyleButton}" Command="{Binding ToLightThemeCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 20"></xctk:IconButton>
+            </Grid>
+        </Grid>
+        <Grid x:Name="RightGrid" Grid.Column="1" Grid.Row="0" Style="{DynamicResource MainGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="160"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="TitleForWindow" Grid.Row="0" Margin="10,43,0,47" Content="{ns:Loc TodayTitle}" FontSize="35" HorizontalAlignment="Left" Width="390"></Label>
+            <Label x:Name="DateAndTime" Grid.Row="0" Margin="443,45,20,45" Content="{Binding CurrentTime}" FontSize="35" HorizontalAlignment="Right" Width="327"/>
+
+            <DataGrid x:Name="FutureToursGrid" Grid.Row="1" Margin="10,0,20,20"
+                      ItemsSource="{Binding TodayTours}"
+                      SelectedItem="{Binding SelectedTour}"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      Cursor="Hand"
+                      Style="{StaticResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Name}" Width="135"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc DescriptionTable}" Binding="{Binding Description}" Width="185"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc LanguageTable}" Binding="{Binding Language}" Width="90"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc NumberOfTourists}" Binding="{Binding MaxGuestsNumber}" Width="120"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc Date}" Binding="{Binding StartTime}" Width="160"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc Duration}" Binding="{Binding Duration}" Width="*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <StatusBar x:Name="StatusBar" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBlock Text="{ns:Loc TodayTitle}" FontSize="15" Height="25" VerticalAlignment="Center" Margin="20 0 0 0"/>
+        </StatusBar>
+    </Grid>
+</Window>

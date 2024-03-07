@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Tourist_Project.WPF.Views.GuestTwo.ComplexToursView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tourist_Project.WPF.Views.GuestTwo" xmlns:viewmodels="clr-namespace:Tourist_Project.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ComplexToursViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1000"
+             Background="#252530">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="235"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Label Margin="30,15,0,0"
+               FontSize="32" Content="Complex tours"
+               HorizontalAlignment="Left" Foreground="White"
+               VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Width="350">
+            <TextBlock Text="Requests:" Margin="0,10"
+                   FontSize="20" TextDecorations="Underline"
+                   HorizontalAlignment="Left"
+                   Foreground="White"/>
+            <DataGrid Margin="0,0,0,0" 
+                      FontSize="15" Height="200"
+                      ItemsSource="{Binding ComplexTours}"
+                      SelectedItem="{Binding SelectedComplexTour}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="150"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                   </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Width="900">
+            <TextBlock Text="Tours:" Margin="0,10"
+                   FontSize="20" TextDecorations="Underline"
+                   HorizontalAlignment="Left"
+                   Foreground="White"/>
+            <DataGrid FontSize="15" Height="250"
+                      ItemsSource="{Binding TourRequests}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="150"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="180"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="120"/>
+                    <DataGridTextColumn Header="Guests" Binding="{Binding GuestsNumber}" Width="75"/>
+                    <DataGridTextColumn Header="StartDate" Binding="{Binding FromDateStr}" Width="110"/>
+                    <DataGridTextColumn Header="EndDate" Binding="{Binding UntilDateStr}" Width="110"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Button Grid.Row="3" Content="Request complex tour"
+                HorizontalAlignment="Center"
+                FontSize="16" Width="165" Height="45" ToolTip="Go to request complex tour page"
+                Command="{Binding RequestComplexTourCommand}"/>
+
+        <StackPanel Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Image Source="/Images/White question mark.png" Height="30"
+                   Cursor="Hand" Margin="30,-5"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HelpCommand}" />
+                </Image.InputBindings>
+            </Image>
+            <TextBlock Text="Help" Foreground="White" HorizontalAlignment="Center"
+                       FontSize="13" Margin="0,0,0,15"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

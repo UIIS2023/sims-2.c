@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Tourist_Project.WPF.Views.GuestTwo.TourHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tourist_Project.WPF.Views.GuestTwo" xmlns:viewmodels="clr-namespace:Tourist_Project.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourHistoryViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1000"
+             Background="#252530">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="550"/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Label Margin="30,15,0,0"
+               FontSize="32" Content="History"
+               HorizontalAlignment="Left" Foreground="White"
+               VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="1" Margin="50" FontSize="15"
+                  ItemsSource="{Binding Tours}" SelectedItem="{Binding SelectedTour}"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="200"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button Command="{Binding ReviewCommand}" Content="Review"
+                HorizontalAlignment="Center" FontSize="15"
+                ToolTip="Preview selected tour" Grid.Row="2" VerticalAlignment="Top"
+                Height="40" Width="100"/>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Image Source="/Images/White question mark.png" Height="30"
+                   Cursor="Hand" Margin="30,-5"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding HelpCommand}" />
+                </Image.InputBindings>
+            </Image>
+            <TextBlock Text="Help" Foreground="White" HorizontalAlignment="Center"
+                       FontSize="13" Margin="0,0,0,15"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

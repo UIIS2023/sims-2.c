@@ -1,0 +1,165 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.Owner.RateGuestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tourist_Project.WPF.Views"
+        xmlns:val="clr-namespace:Tourist_Project.WPF.Validation"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="RateGuestWindow" Height="750" Width="400" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="{x:Type Label}" TargetType="Label">
+            <Setter Property="Foreground" Value="#0da2a5"></Setter>
+        </Style>
+        <Style x:Key="{x:Type Button}" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                        <GradientStop Color="#03888f" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#0da2a5"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#d9eeef"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="BorderBrush" Value="#67c9cb"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#0da2a5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="{x:Type TextBox}" TargetType="TextBox">
+            <Setter Property="Background" Value="#d9eeef"></Setter>
+            <Setter Property="Foreground" Value="#0da2a5"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="Padding" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="#67c9cb"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10,5,10,5">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#edf6f7"></Setter>
+                                <Setter TargetName="border" Property="BorderThickness" Value="1"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="{x:Type xctk:IntegerUpDown}" TargetType="xctk:IntegerUpDown">
+            <Setter Property="Background" Value="#d9eeef"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="BorderBrush" Value="#67c9cb"></Setter>
+            <Setter Property="Foreground" Value="#0da2a5"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="Background" Value="#efdaee"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand}"></KeyBinding>
+        <KeyBinding Key="R" Modifiers="Shift" Command="{Binding RateCommand}"></KeyBinding>
+    </Window.InputBindings>
+    <Grid>
+        <Border BorderThickness="1"
+                BorderBrush="#03888f"
+                Margin="20,20,20,550"
+                CornerRadius="20,10,20,10">
+            <Grid Margin="5">
+                <Label Content="Guest name:" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,10"></Label>
+                <Label Content="{Binding GuestRate.User.FullName}" Foreground="#F76A14" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Margin="0,10"></Label>
+                <Label Content="Accommodation name:" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,40, 10, 0"></Label>
+                <Label Content="{Binding GuestRate.Accommodation.Name}" Foreground="#F76A14" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Margin="0,40,0, 0"></Label>
+                <Label Content="Checked in:" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,70, 20, 0"></Label>
+                <Label Content="{Binding GuestRate.Reservation.CheckIn}" Foreground="#F76A14" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Margin="0,70,0,0"></Label>
+                <Label Content="Checked out:" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,100, 10, 0"></Label>
+                <Label Content="{Binding GuestRate.Reservation.CheckOut}" Foreground="#F76A14" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Margin="0,100, 0, 0"></Label>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                        <GradientStop Color="#acdcdc" Offset="0.8"></GradientStop>
+                        <GradientStop Color="#d9eeef"></GradientStop>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#acdcdc" Offset="0.8"></GradientStop>
+                    <GradientStop Color="#d9eeef"></GradientStop>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label HorizontalAlignment="Left" Content="Cleanness:"  Margin="20,176,20,416" Width="306" FontSize="20"></Label>
+        <Label HorizontalAlignment="Left" Content="Rules:" Margin="20,268,20,233" Width="306" FontSize="20"></Label>
+        <Label HorizontalAlignment="Left" Content="Additional comment:" Margin="20,364,20,147" Width="306" FontSize="20"></Label>
+        <xctk:IntegerUpDown Height="28" Margin="20,103,20,356" Minimum="1" Maximum="5" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <xctk:IntegerUpDown.Value>
+                <Binding Path="GuestRate.GuestRating.CleanlinessGrade" UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </xctk:IntegerUpDown.Value>
+        </xctk:IntegerUpDown>
+        <xctk:IntegerUpDown Height="28" Margin="20,210,20,275" Minimum="1" Maximum="5" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <xctk:IntegerUpDown.Value>
+                <Binding Path="GuestRate.GuestRating.RuleCompliance" UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </xctk:IntegerUpDown.Value>
+        </xctk:IntegerUpDown>
+        <TextBox Height="108" Margin="20,347,20,133" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <TextBox.Text>
+                <Binding Path="GuestRate.GuestRating.Comment" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation></val:EmptyStringValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Content="Rate(Shift+R)" FontSize="20" Height="38" Margin="20,599,20,0" Command="{Binding RateCommand}"></Button>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#acdcdc" Offset="0.6"></GradientStop>
+                <GradientStop Color="#d9eeef" Offset="0.1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+    </Grid>
+</Window>

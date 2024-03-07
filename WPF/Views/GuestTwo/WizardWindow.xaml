@@ -1,0 +1,128 @@
+﻿<Window x:Class="Tourist_Project.WPF.Views.GuestTwo.WizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tourist_Project.WPF.Views.GuestTwo"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewModels="clr-namespace:Tourist_Project.WPF.ViewModels"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Wizard for introduction to the application" Height="550" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:WizardViewModel />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding SaveWizardSettingsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140*" />
+            <ColumnDefinition Width="670*" />
+        </Grid.ColumnDefinitions>
+        <xctk:Wizard
+            Grid.ColumnSpan="2"
+            CanHelp="False"
+            CancelButtonVisibility="Collapsed"
+            HelpButtonVisibility="Collapsed">
+            <xctk:WizardPage
+                x:Name="IntroPage"
+                Title="Welcome to the Guest 2 Application!"
+                Description="This Wizard will guide you through my user interface and the main functionalities of my application." />
+            <xctk:WizardPage
+                x:Name="WizardPage1"
+                Title="Home page"
+                Description="This page shows all the tours we offer. You can also enter the parameters to search for more specific tours. When you find a tour you can hit the reserve button and it will take you to the reservation page for that tour."
+                NextPage="{Binding ElementName=WizardPage2}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=IntroPage}">
+                <Image Source="/Images/Wizard Images/HomePage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage2"
+                Title="Reservation page"
+                Description="Here you can see more details about the tour. You have to enter the amount of people you wish to reserve for, and optionally you can consume one of your vouchers."
+                NextPage="{Binding ElementName=WizardPage3}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage1}">
+                <Image Source="/Images/Wizard Images/ReservationPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage3"
+                Title="My Tours page"
+                Description="Here are displayed all of your reserved tours. The bottom grid represents the tours which are today. When the tour begins, you first have to join the tour, then when when the tour guide calls you out, you will get a notification where you will have to confirm that you are present, and when you confirm that you are present then you can watch the tour live."
+                NextPage="{Binding ElementName=WizardPage4}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage2}">
+                <Image Source="/Images/Wizard Images/MyToursPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage4"
+                Title="History page"
+                Description="Here are all of your past tours, even the ones where you weren't present. You can hit the review button to go to the review page."
+                NextPage="{Binding ElementName=WizardPage5}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage3}">
+                <Image Source="/Images/Wizard Images/HistoryPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage5"
+                Title="Review page"
+                Description="Here you can see more details about the tour and you cane rate the tour if you were present."
+                NextPage="{Binding ElementName=WizardPage6}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage4}">
+                <Image Source="/Images/Wizard Images/ReviewPage.png"/>
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage6"
+                Title="Requests and Statistics page"
+                Description="Here you can request your own personal tour and later a guide can accept your request and guide you through this tour. You can also see the stats of your requests that were accepted."
+                NextPage="{Binding ElementName=WizardPage7}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage5}">
+                <Image Source="/Images/Wizard Images/RequestsStatsPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage7"
+                Title="Complex Tours page"
+                Description="Here are displayed all of your complex tour requests. When you select a complex tour the lower grid refreshes and displays all of its partial requests."
+                NextPage="{Binding ElementName=WizardPage8}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage6}">
+                <Image Source="/Images/Wizard Images/ComplexToursPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage8"
+                Title="Request Complex Tour page"
+                Description="Here you can request a complex tour. It is very similar to the Requests/Stats page but without the statistics."
+                NextPage="{Binding ElementName=WizardPage9}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage7}">
+                <Image Source="/Images/Wizard Images/RequestComplexTourPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage9"
+                Title="Vouchers page"
+                Description="Here are all of your vouchers displayed. You can get a voucher if you go to 5 tours in 1 year or if a guide cancels his tour. On the bottom left of the page you can download a report of all of your vouchers."
+                NextPage="{Binding ElementName=WizardPage10}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage8}">
+                <Image Source="/Images/Wizard Images/VouchersPage.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage10"
+                Title="Notifications page"
+                CanFinish="True"
+                Description="Here are all of your notifications. I think this page is pretty self-explanatory. That's all the basic stuff out the way, thank you for following this wizard and good luck in your future tours!"
+                PageType="Interior">
+                <Image Source="/Images/Wizard Images/NotificationsPage.png" />
+            </xctk:WizardPage>
+        </xctk:Wizard>
+    </Grid>
+</Window>
